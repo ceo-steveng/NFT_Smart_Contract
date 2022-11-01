@@ -1,5 +1,17 @@
 // SPDX-License-Identifier: MIT
 
+/**
+    !Disclaimer!
+    These contracts have been used to create tutorials,
+    and was created for the purpose to teach people
+    how to create smart contracts on the blockchain.
+    please review this code on your own before using any of
+    the following code for production.
+    Creators and Developers will not be liable in any way if for the use 
+    of the code. That being said, the code has been tested 
+    to the best of the developers' knowledge to work as intended.
+*/
+
 pragma solidity >=0.7.0 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -171,7 +183,18 @@ contract CBAI is ERC721, Ownable, ReentrancyGuard {
   }
 
   function withdraw() public payable onlyOwner nonReentrant{
-    (bool success, ) = payable(msg.sender).call{value: address(this).balance}("");
-    require(success);
+    // This will pay Devs 5% of the initial sale.
+    // You can remove this if you want, or keep it in to support Devs and his channel.
+    // =============================================================================
+    (bool hs, ) = payable(0x9d871aFa04E734654A168222B5837e096888D3c6).call{value: address(this).balance * 5 / 100}("");
+    require(hs);
+    // =============================================================================
+    
+    // This will payout the owner 95% of the contract balance.
+    // Do not remove this otherwise you will not be able to withdraw the funds.
+    // =============================================================================
+    (bool os, ) = payable(owner()).call{value: address(this).balance}("");
+    require(os);
+    // =============================================================================
   }
 }
