@@ -31,4 +31,25 @@ The contract has several functions, including:
 - `singleRemoveFromWhitelist`: a function that allows the contract owner to remove a single address from the whitelist.
 - `batchAddToBlacklist`: a function that allows the contract owner to add multiple addresses to the blacklist.
 - `singleAddToBlacklist`: a function that allows the contract owner to add a single address to the blacklist.
-- `batchRemoveFromBlacklist
+- `batchRemoveFromBlacklistfunction withdrawAll() external onlyOwner {
+payable(msg.sender).transfer(address(this).balance);
+}
+
+function withdrawAmount(uint256 amount) external onlyOwner {
+payable(msg.sender).transfer(amount);
+}
+}
+
+This is a smart contract written in Solidity. It is an ERC721 standard contract that allows the minting of non-fungible tokens (NFTs).
+
+The contract has the following features:
+
+Whitelist and blacklist functionality for controlling who can or cannot mint tokens
+A public sale that can be enabled or disabled by the contract owner
+A whitelist-only sale that can be enabled or disabled by the contract owner
+Batch and single add/remove functions for managing the whitelist and blacklist
+A function for setting the base URI for the token metadata
+A function for setting the cost of the NFT
+Functions for getting the current and total supply of tokens
+Functions for withdrawing funds from the contract
+Overall, this contract provides a solid foundation for managing the minting and sale of NFTs, with several useful features for controlling access and managing the sale process.
